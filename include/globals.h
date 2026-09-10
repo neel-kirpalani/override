@@ -10,6 +10,12 @@ extern pros::Controller controller;
 extern pros::MotorGroup left_motor_group;
 extern pros::MotorGroup right_motor_group;
 
+extern pros::MotorGroup left_tracking_motors;
+extern pros::MotorGroup right_tracking_motors;
+
+extern lemlib::TrackingWheel left_track;
+extern lemlib::TrackingWheel right_track;
+
 // Intake motor groups
 extern pros::MotorGroup intake_motor;
 extern pros::MotorGroup intake_motor2;

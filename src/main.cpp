@@ -63,7 +63,7 @@ void competition_initialize() {
 
 // ===== AUTONOMOUS FUNCTION =====
 void autonomous() {
-
+    lateral_PID_tune();
 }
 
 
