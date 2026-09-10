@@ -79,6 +79,12 @@ void left4_1(){
     pros::delay(500);
     chassis.turnToHeading(270, 1000);
     pros::delay(500);
+    chassis.moveToPoint(-35.213, -55.404, 2000);
+    pros::delay(500);
+    chassis.turnToHeading(305, 1000);
+    pros::delay(500);
+    chassis.moveToPoint(-41.273, -51.076, 2000);
+    pros::delay(500);
 
 
 
