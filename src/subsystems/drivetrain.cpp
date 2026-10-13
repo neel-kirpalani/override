@@ -9,7 +9,7 @@ lemlib::Drivetrain drivetrain(
     &right_motor_group,              // right motor group
     11.2,                          // track width
     lemlib::Omniwheel::NEW_275,      // wheel type
-    400,                             // drivetrain rpm
+    450,                             // drivetrain rpm
     2                                // horizontal drift
 );
 
@@ -26,22 +26,22 @@ lemlib::OdomSensors odomSensors(
 
 // Lateral PID controller
 lemlib::ControllerSettings lateral_controller(
-    6,   // kP
+    15,   // kP
     0,   // kI
-    9,   // kD
+    30,   // kD
     0,   // anti windup
     0,   // small error range (in)
     0,   // small error timeout (ms)
     0,   // large error range (in)
     0,   // large error timeout (ms)
-    0    // max acceleration
+    30    // max acceleration
 );
 
 // Angular PID controller
 lemlib::ControllerSettings angular_controller(
-    1.6,   // kP
+    4,   // kP
     0,   // kI
-    8,  // kD
+    24,  // kD
     0,   // anti windup
     0,   // small error range (deg)
     0,   // small error timeout (ms)

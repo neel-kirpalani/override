@@ -20,6 +20,9 @@ extern lemlib::TrackingWheel right_track;
 extern pros::MotorGroup intake_motor;
 extern pros::MotorGroup intake_motor2;
 
+// Cascade motor group
+extern pros::MotorGroup cascade_motor;
+
 // Optical sensors
 extern pros::Optical colorSensor;
 extern pros::Optical sortSensor;
