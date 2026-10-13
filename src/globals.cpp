@@ -16,8 +16,8 @@ pros::MotorGroup right_motor_group({1, 2, -3}, pros::MotorGearset::blue);
 pros::MotorGroup left_tracking_motors({-9, -10}, pros::MotorGearset::blue);
 pros::MotorGroup right_tracking_motors({1,2}, pros::MotorGearset::blue);
 
-lemlib::TrackingWheel left_track(&left_tracking_motors, lemlib::Omniwheel::NEW_275, -5.6, 400);
-lemlib::TrackingWheel right_track(&right_tracking_motors, lemlib::Omniwheel::NEW_275, 5.6, 400);
+lemlib::TrackingWheel left_track(&left_tracking_motors, lemlib::Omniwheel::NEW_275, -5.6, 450);
+lemlib::TrackingWheel right_track(&right_tracking_motors, lemlib::Omniwheel::NEW_275, 5.6, 450);
 
 // Intakes 
 pros::MotorGroup intake_motor({9, -8}, pros::MotorGearset::blue);
