@@ -1023,16 +1023,24 @@ static void screen_step(bool force) {
 
     uint32_t now = pros::millis();
 
+    // LVGL is already driven by the PROS LVGL port's own display/touch timer
+    // task. Running a second handler here from a PROS task meant two runners
+    // mutating the same objects unlocked, which froze the UI.
+#ifdef BUILD_SCREEN_SIM
     lv_timer_handler();
+#endif
 
     char buf[32];
     snprintf(buf, sizeof(buf), "pos %.0f", cascade_position());
     lv_label_set_text(header_pos, buf);
 
-    if (force || (now - last_telem) >= 50) {
-        last_telem = now;
-        lemlib::telemetrySink()->info("Chassis pose: {}", chassis.getPose());
-    }
+    // Disabled: this now runs inside an LVGL timer callback, and blocking
+    // telemetry logging here would delay touch handling. Move it to its own
+    // task if it is needed again.
+    // if (force || (now - last_telem) >= 50) {
+    //     last_telem = now;
+    //     lemlib::telemetrySink()->info("Chassis pose: {}", chassis.getPose());
+    // }
 
     if (force || (now - last_motor) >= 500) {
         last_motor = now;
@@ -1049,10 +1057,9 @@ static void screen_step(bool force) {
 }
 
 void screen_task() {
-    while (true) {
+    lv_timer_create([](lv_timer_t*) {
         screen_step(false);
-        pros::delay(5);
-    }
+    }, 20, nullptr);
 }
 
 #ifdef BUILD_SCREEN_SIM

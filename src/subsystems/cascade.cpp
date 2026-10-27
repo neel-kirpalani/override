@@ -91,15 +91,12 @@ void cascade_init() {
 // motor is unplugged, mis-wired, or its encoder has failed, a single-motor
 // read can sit at zero (or return an error) while the cascade is actually
 // moving. Averaging the healthy motors degrades gracefully instead.
-// One motor's movement since startup, in encoder degrees, with the port's
-// direction normalised so a reversed port ("-15") counts the same way as a
-// forward one.
-//
-// The sign is taken from each motor's own baseline rather than from the
-// movement, so the result keeps its direction: it rises when the cascade
-// rises and falls when the cascade lowers. Careful: taking the magnitude of
-// the movement instead would make the value only ever climb, which breaks
-// both the readout and cascade_go_to()'s idea of "above" and "below".
+// One motor's movement since startup, in encoder degrees. PROS already
+// negates position telemetry for a reversed port ("-15"), so subtracting the
+// startup baseline is all that is needed and both motors then agree in sign:
+// the result rises when the cascade rises and falls when it lowers. Do not
+// add an extra sign flip or take the magnitude - either one breaks the
+// readout and cascade_go_to()'s idea of "above" and "below".
 static bool motor_delta(const std::vector<double>& all, size_t i, double* out) {
     if (i >= all.size()) return false;
     double v = all[i];
@@ -112,10 +109,9 @@ static bool motor_delta(const std::vector<double>& all, size_t i, double* out) {
 
     double base = (i < (size_t)motor_base_n) ? motor_base[i] : 0.0;
 
-    // A negative baseline means this port reports inverted, so flip it.
-    double sign = (base < 0.0) ? -1.0 : 1.0;
-
-    *out = sign * (v - base);
+    // The baseline is an offset, not a direction, so just subtract it. PROS
+    // has already negated this port's telemetry if the port is reversed.
+    *out = v - base;
     return true;
 }
 
