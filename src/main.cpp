@@ -7,6 +7,7 @@
 #include "routines/skills.h"
 #include "subsystems/macros.h"
 #include "subsystems/cascade.h"
+#include "subsystems/small_motor.h"
 #include "subsystems/screen.h"
 
 
@@ -40,6 +41,7 @@ void initialize() {
     left_motor_group.set_brake_mode_all(pros::E_MOTOR_BRAKE_BRAKE);
     right_motor_group.set_brake_mode_all(pros::E_MOTOR_BRAKE_BRAKE);
     small_motor.set_brake_mode_all(pros::E_MOTOR_BRAKE_BRAKE);
+    small_motor_init();
     // Build the brain UI and start refreshing it. Runs in the background so
     // it stays live during disabled, autonomous and driver control.
     screen_init();
@@ -49,7 +51,7 @@ void initialize() {
 
 // ===== DISABLED FUNCTION =====
 void disabled() {
-
+    small_motor_stop();
 }
 
 
@@ -63,14 +65,16 @@ void competition_initialize() {
 // more: build a separate program per auton and switch between them on the
 // controller.
 void autonomous() {
-    auton3();
-    //auton2();
+    small_motor_stop(); // do not remove
+    //auton3();
+    auton2();
     //left4_1();
     //skills_auton();
 }
 
 // ===== OPCONTROL FUNCTION =====
 void opcontrol() {
+    small_motor_stop();
     // Rumble cues. Match length and the two warning points, in seconds
     // remaining; change a cue time here and nothing else needs touching.
     constexpr int DRIVER_DURATION_S = 105;

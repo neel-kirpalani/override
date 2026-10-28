@@ -4,6 +4,8 @@
 #include "subsystems/intake.h"
 #include "routines/skills.h"
 #include "subsystems/cascade.h"
+#include "subsystems/small_motor.h"
+
 
 void skills_auton() {
     // auton3 code first
@@ -68,7 +70,7 @@ void skills_auton() {
     //chassis.moveToPoint(41.379, 41.39, 2000, {.maxSpeed=47});
     pros::delay(920);
     pneA.set_value(false);
-    pros::delay(300);
+    pros::delay(150);
     chassis.turnToHeading(166, 700, {}, true);
     cascade_go_to(800);
     chassis.waitUntilDone();
