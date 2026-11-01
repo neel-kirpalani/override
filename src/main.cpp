@@ -65,11 +65,11 @@ void competition_initialize() {
 // more: build a separate program per auton and switch between them on the
 // controller.
 void autonomous() {
-    small_motor_stop(); // do not remove
+    //small_motor_stop(); // do not remove
     //auton3();
-    auton2();
+    //auton2();
     //left4_1();
-    //skills_auton();
+    skills_auton();
 }
 
 // ===== OPCONTROL FUNCTION =====

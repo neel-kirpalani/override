@@ -90,9 +90,9 @@ void left4_1(){ // not tested
 
 void auton2(){ // test auton side toggle
     
-    small_motor_move_rotations(1, 50, 2000, false);
-    small_motor_move_rotations(2, 50, 2000, false);
-    small_motor_move_rotations(-3, 50, 2000, false);
+    small_motor.move_relative(1080, 200);
+
+    
     
 }
 
