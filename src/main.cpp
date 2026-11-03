@@ -66,10 +66,10 @@ void competition_initialize() {
 // controller.
 void autonomous() {
     //small_motor_stop(); // do not remove
-    //auton3();
+    auton3();
     //auton2();
     //left4_1();
-    skills_auton();
+    //skills_auton();
 }
 
 // ===== OPCONTROL FUNCTION =====
@@ -112,7 +112,7 @@ void opcontrol() {
         }
 
         if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
-            //autonomous();
+            //auton3();
         }
 
 
