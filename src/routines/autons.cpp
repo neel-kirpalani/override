@@ -106,7 +106,7 @@ void auton2(){ // awp auton for stamford
     pros::delay(2);
     chassis.moveToPoint(58, 0, 700, {.minSpeed=80}, true);
     pros::delay(10);
-    cascade_go_to(500);
+    cascade_go_to(400);
     chassis.waitUntilDone();
     chassis.turnToHeading(339, 550);
     pros::delay(5);
@@ -122,8 +122,8 @@ void auton2(){ // awp auton for stamford
     pros::delay(5);
     //chassis.moveToPoint(41.374, 13.566, 900, {.maxSpeed=100});
     //pros::delay(5);
-    chassis.moveToPoint(35.273, 16.696, 1200, {.maxSpeed=65});  
-    pros::delay(740);
+    chassis.moveToPoint(32.7, 17.8, 1500, {.maxSpeed=65});  
+    pros::delay(700);
     pneA.set_value(false);
     pros::delay(350);
     chassis.turnToHeading(77, 900, {}, true);
@@ -145,16 +145,16 @@ void auton2(){ // awp auton for stamford
 
     
 
-    chassis.moveToPoint(40, 40, 2000, {.maxSpeed=50});
+    chassis.moveToPoint(40, 41.5, 2000, {.maxSpeed=53});
     //chassis.moveToPoint(41.379, 41.39, 2000, {.maxSpeed=47});
-    pros::delay(900);
+    pros::delay(800);
     pneA.set_value(false);
-    pros::delay(300);
+    pros::delay(200);
     chassis.turnToHeading(300, 700, {}, true);
     cascade_go_to(450);
     chassis.waitUntilDone();
-    chassis.moveToPoint(29, 39, 1500, {.maxSpeed=50});
-    pros::delay(680);
+    chassis.moveToPoint(26, 43.5, 1500, {.maxSpeed=70});
+    pros::delay(700);
     cascade_go_to(0);
     pros::delay(100);
     
@@ -182,7 +182,7 @@ void auton3(){ // main auton
     pros::delay(2);
     chassis.moveToPoint(58, 0, 700, {.minSpeed=80}, true);
     pros::delay(10);
-    cascade_go_to(500);
+    cascade_go_to(400);
     chassis.waitUntilDone();
     chassis.turnToHeading(339, 550);
     pros::delay(5);
@@ -198,8 +198,8 @@ void auton3(){ // main auton
     pros::delay(5);
     //chassis.moveToPoint(41.374, 13.566, 900, {.maxSpeed=100});
     //pros::delay(5);
-    chassis.moveToPoint(31.327, 18.762, 1500, {.maxSpeed=65});  
-    pros::delay(760);
+    chassis.moveToPoint(32.7, 17.8, 1500, {.maxSpeed=65});  
+    pros::delay(700);
     pneA.set_value(false);
     pros::delay(350);
     chassis.turnToHeading(77, 900, {}, true);
@@ -221,11 +221,12 @@ void auton3(){ // main auton
 
     
 
-    chassis.moveToPoint(40, 41, 2000, {.maxSpeed=53});
+    
+    chassis.moveToPoint(40, 41.5, 2000, {.maxSpeed=53});
     //chassis.moveToPoint(41.379, 41.39, 2000, {.maxSpeed=47});
-    pros::delay(800);
+    pros::delay(850);
     pneA.set_value(false);
-    pros::delay(300);
+    pros::delay(200);
     chassis.turnToHeading(166, 700, {}, true);
     cascade_go_to(800);
     chassis.waitUntilDone();

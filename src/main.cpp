@@ -23,6 +23,30 @@ bool intake2_forward = false;
 bool intake2_reverse = false;
 bool auto_intake_active = false;
 
+// ===== CLAW DISTANCE SENSOR (driver-control auto-close) =====
+#define CLAW_DIST_PORT 5
+static pros::Distance clawDist(CLAW_DIST_PORT);
+
+// UNVERIFIED assumption: false CLOSES pneA.
+// I must confirm this on the robot before using auto-close.
+constexpr bool CLAW_CLOSE_VALUE = false;
+
+// Speed compensation — default OFF until I verify signed motor velocities.
+constexpr bool CLAW_SPEED_COMP = true;
+// Sign of forward RPM for left+right average. May be -1.0 or 1.0.
+constexpr double CLAW_RPM_SIGN = 1.0;
+constexpr int32_t CLAW_BASE_TRIGGER_MM = 130;
+// 100 ms is an untested tuning value, NOT measured pneumatic closure time.
+constexpr double CLAW_LEAD_MS = 50;
+constexpr int32_t CLAW_MAX_TRIGGER_MM = 200;
+
+// Must be above CLAW_MAX_TRIGGER_MM so a valid clear reading always re-arms.
+constexpr int CLAW_CLEAR_MM = 240;
+
+constexpr int CLAW_CONFIRM_READS = 1;
+static bool claw_wait_clear = false;
+static int claw_hits = 0;
+
 
 
 
@@ -74,6 +98,10 @@ void autonomous() {
 
 // ===== OPCONTROL FUNCTION =====
 void opcontrol() {
+    // Claw auto-close state: no object seen yet, and armed to close.
+    claw_hits = 0;
+    claw_wait_clear = false;
+
     small_motor_stop();
     // Rumble cues. Match length and the two warning points, in seconds
     // remaining; change a cue time here and nothing else needs touching.
@@ -96,6 +124,8 @@ void opcontrol() {
     uint32_t start = pros::millis();
 
     while (true) {
+        bool l1_pressed_this_loop = false;
+
         // Driver-control rumble cues. Nothing blocks: this reads the clock and
         // only calls rumble() on the single iteration where a cue fires, so it
         // rides the loop's existing 25 ms delay. Signed math keeps the
@@ -158,7 +188,71 @@ void opcontrol() {
         if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
             pne1 = !pne1;
             pneA.set_value(pne1);
+
+            l1_pressed_this_loop = true;
+            claw_hits = 0;
+            if (pne1 != CLAW_CLOSE_VALUE) {
+                claw_wait_clear = true;
+            }
         }
+
+        // Claw auto-close: driver control only. Non-blocking; rides the loop's
+        // existing 25 ms delay. Manual L1 wins for this tick, and after a manual
+        // open the claw re-arms only once the sensor reads clear.
+        //
+        // Speed compensation (off by default): estimate forward wheel speed from
+        // motor RPM and add reciprocal lead distance.  The 2.74 conversion is an
+        // approximate mm/s per motor RPM based on the existing 2.75-inch wheels
+        // and 450/600 drivetrain ratio.  get_actual_velocity() reads the FIRST
+        // motor of each group, not a group average.  This is a wheel-speed
+        // estimate, not measured ground or pin-relative speed; slip and curved
+        // driving affect it.  Reverse motion gets no extra lead after the sign
+        // is correctly set, but the base trigger still operates.
+        double left_rpm  = left_motor_group.get_actual_velocity();
+        double right_rpm = right_motor_group.get_actual_velocity();
+        int32_t claw_trigger_mm = CLAW_BASE_TRIGGER_MM;
+        if (CLAW_SPEED_COMP && std::isfinite(left_rpm) && std::isfinite(right_rpm)) {
+            double fwd_mm_s = (left_rpm + right_rpm) / 2.0 * 2.74 * CLAW_RPM_SIGN;
+            if (fwd_mm_s < 0) fwd_mm_s = 0;
+            double t = CLAW_BASE_TRIGGER_MM + fwd_mm_s * CLAW_LEAD_MS / 1000.0;
+            if (!std::isfinite(t) || t < CLAW_BASE_TRIGGER_MM) t = CLAW_BASE_TRIGGER_MM;
+            if (t > CLAW_MAX_TRIGGER_MM) t = CLAW_MAX_TRIGGER_MM;
+            claw_trigger_mm = (int32_t)t;
+        }
+
+        // Temporary sign-check logging, at most twice per second.
+        static uint32_t claw_dbg_last = 0;
+        uint32_t claw_dbg_now = pros::millis();
+        if (claw_dbg_now - claw_dbg_last >= 500) {
+            claw_dbg_last = claw_dbg_now;
+            printf("[claw-dbg] L %.1f R %.1f rpm\n", left_rpm, right_rpm);
+        }
+
+        int32_t mm = clawDist.get_distance();
+        if (mm == PROS_ERR || mm <= 0) {
+            claw_hits = 0;
+            // Error/nonpositive reading: never treat it as object or clear.
+        } else {
+            if (mm >= CLAW_CLEAR_MM) {
+                claw_wait_clear = false;
+            }
+            bool claw_open = (pne1 != CLAW_CLOSE_VALUE);
+            if (!l1_pressed_this_loop && claw_open &&
+                !claw_wait_clear && mm < claw_trigger_mm) {
+                claw_hits++;
+            } else {
+                claw_hits = 0;
+            }
+            if (claw_hits >= CLAW_CONFIRM_READS) {
+                pne1 = CLAW_CLOSE_VALUE;
+                pneA.set_value(pne1);
+                claw_hits = 0;
+                claw_wait_clear = true;
+                controller.rumble(".");
+                printf("[claw] auto close at %d mm (trigger %d)\n", (int)mm, (int)claw_trigger_mm);
+            }
+        }
+
         // B: pneumatics solenoid on port H
         if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
             pne4 = !pne4;

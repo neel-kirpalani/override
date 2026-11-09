@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "3 pin",
+    "project_name": "3 Pin",
     "target": "v5",
     "templates": {
       "LemLib": {
