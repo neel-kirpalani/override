@@ -9,6 +9,8 @@
 #include "subsystems/cascade.h"
 #include "subsystems/small_motor.h"
 #include "subsystems/screen.h"
+#include "mvlib/api.hpp"
+#include "mvlib/Optional/lemlib.hpp"
 
 
 // ===== GLOBAL VARIABLES =====
@@ -71,6 +73,15 @@ void initialize() {
     screen_init();
     screen_task();
 
+
+    auto& logger = mvlib::Logger::getInstance();
+    mvlib::setOdom(&chassis);
+    logger.setRobot({
+        .leftDrivetrain = &left_motor_group,
+        .rightDrivetrain = &right_motor_group
+    });
+    logger.start();
+
 }
 
 // ===== DISABLED FUNCTION =====
@@ -90,10 +101,11 @@ void competition_initialize() {
 // controller.
 void autonomous() {
     //small_motor_stop(); // do not remove
-    auton3();
+    //auton3();
     //auton2();
     //left4_1();
     //skills_auton();
+    auton4();
 }
 
 // ===== OPCONTROL FUNCTION =====

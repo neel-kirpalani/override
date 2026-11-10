@@ -76,7 +76,7 @@ void left4_1(){ // not tested
     //pros::delay(500);
     //chassis.setPose(54.256, -6.556, 175);
 
-    chassis.moveToPose(58, 0, 180, 1500,{.forwards=false,.minSpeed=80});
+    chassis.moveToPose(58, 0, 50.6, 1500,{.forwards=false,.minSpeed=80});
     pros::delay(100);
 
     chassis.arcade(50, 0);
@@ -235,4 +235,64 @@ void auton3(){ // main auton
     pros::delay(800);
     cascade_go_to(0);
     pros::delay(100);
+}
+
+void auton4(){ // 4 pin auto (uses wall pin + cup)
+
+    // preload into alliance goal
+    chassis.setPose(62.5, 0, 270);
+    cascade_go_to(350);
+    chassis.moveToPose(47, 19.5, 0, 1200, {.minSpeed=90},true);
+    pros::delay(950);
+    cascade_go_to(0);
+    pros::delay(500);
+    pneA.set_value(true);
+    pros::delay(100);
+
+    // wall yellow
+    chassis.moveToPoint(47, 7.5, 1500, {.forwards=false, .minSpeed=80});
+    pros::delay(10);
+    chassis.turnToHeading(50.6, 900);
+    pros::delay(10);
+    chassis.moveToPoint(57, 16, 1500, {.maxSpeed=50});
+    pros::delay(10);
+    chassis.swingToHeading(90, lemlib::DriveSide::RIGHT, 900, {},true);
+    pros::delay(100);
+    pneA.set_value(false);
+    chassis.waitUntilDone();
+    pros::delay(10);
+
+    left_motor_group.move_voltage(8000);
+    right_motor_group.move_voltage(8000);
+    pros::delay(700);
+    left_motor_group.move_voltage(0);
+    right_motor_group.move_voltage(0);
+
+    cascade_go_to(500);
+    pros::delay(150);
+    chassis.turnToHeading(30, 900);
+    pros::delay(20);
+    chassis.moveToPoint(50, 0, 1500, {.forwards=false});
+    pros::delay(20);
+    chassis.turnToHeading(0, 900);
+    pros::delay(20);
+    chassis.moveToPoint(50, 12, 1500, {.maxSpeed=60});
+    pros::delay(650);
+    cascade_go_to(0);
+    pros::delay(200);
+    pneA.set_value(true);
+
+    // stray yellow 1
+
+
+    // stray yellow 2
+
+    // stray yellow 3
+
+
+    
+
+    
+    
+    
 }
