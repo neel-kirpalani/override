@@ -13,11 +13,8 @@ pros::Controller controller(pros::E_CONTROLLER_MASTER);
 pros::MotorGroup left_motor_group({10,-8}, pros::MotorGearset::blue);
 pros::MotorGroup right_motor_group({1, -2}, pros::MotorGearset::blue);
 
-lemlib::TrackingWheel left_track(&left_tracking_motors, lemlib::Omniwheel::NEW_275, -5.6, 400);
-lemlib::TrackingWheel right_track(&right_tracking_motors, lemlib::Omniwheel::NEW_275, 5.6, 400);
-
 // Intakes 
-pros::MotorGroup intake_motor({9, -8}, pros::MotorGearset::blue);
+pros::MotorGroup intake_motor({9, -3}, pros::MotorGearset::blue);
 pros::MotorGroup intake_motor2({-7}, pros::MotorGearset::blue);
 
 // Cascade
@@ -26,8 +23,6 @@ pros::MotorGroup cascade_motor({14, -15}, pros::MotorGearset::green, pros::Motor
 // 5.5W motors - CHANGE THESE PORTS to wherever they are plugged in.
 // 5.5W motors are green cartridges (200 rpm).
 pros::MotorGroup small_motor({-4, 7}, pros::MotorGearset::green);
-
-// Sensors 
 
 
 // Pneumatics 

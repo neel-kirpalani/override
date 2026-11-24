@@ -10,7 +10,7 @@ lemlib::Drivetrain drivetrain(
     10.816,                          // track width
     lemlib::Omniwheel::NEW_275,      // wheel type
     450,                             // drivetrain rpm
-    2                                // horizontal drift
+    8                                // horizontal drift
 );
 
 
