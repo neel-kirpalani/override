@@ -252,9 +252,9 @@ void auton4(){ // 4 pin auto (uses wall pin + cup)
     // wall yellow
     chassis.moveToPoint(47, 7.5, 1500, {.forwards=false, .minSpeed=80});
     pros::delay(10);
-    chassis.turnToHeading(50.6, 900);
+    chassis.turnToHeading(51, 900);
     pros::delay(10);
-    chassis.moveToPoint(57, 16, 1500, {.maxSpeed=50});
+    chassis.moveToPoint(57, 16.5, 1500, {.maxSpeed=50});
     pros::delay(10);
     chassis.swingToHeading(90, lemlib::DriveSide::RIGHT, 900, {},true);
     pros::delay(100);
@@ -264,25 +264,43 @@ void auton4(){ // 4 pin auto (uses wall pin + cup)
 
     left_motor_group.move_voltage(8000);
     right_motor_group.move_voltage(8000);
-    pros::delay(700);
+    pros::delay(400);
     left_motor_group.move_voltage(0);
     right_motor_group.move_voltage(0);
 
     cascade_go_to(500);
-    pros::delay(150);
+    pros::delay(100);
     chassis.turnToHeading(30, 900);
-    pros::delay(20);
-    chassis.moveToPoint(50, 0, 1500, {.forwards=false});
-    pros::delay(20);
+    pros::delay(5);
+    chassis.moveToPoint(47, 0, 1500, {.forwards=false});
+    pros::delay(5);
     chassis.turnToHeading(0, 900);
-    pros::delay(20);
-    chassis.moveToPoint(50, 12, 1500, {.maxSpeed=60});
-    pros::delay(650);
+    pros::delay(5);
+    chassis.moveToPoint(47.8, 12, 1500, {.maxSpeed=60});
+    pros::delay(450);
     cascade_go_to(0);
     pros::delay(200);
     pneA.set_value(true);
 
     // stray yellow 1
+    pros::delay(100);
+    chassis.moveToPoint(47, 7.5, 1200, {.forwards=false});
+    pros::delay(5);
+    chassis.turnToHeading(306.5, 800);
+    pros::delay(5);
+    chassis.moveToPoint(31.6, 18.9, 2000, {.maxSpeed=50});
+    pros::delay(680);
+    pneA.set_value(false);
+    pros::delay(50);
+    cascade_go_to(700);
+    pros::delay(50);
+    chassis.turnToHeading(63, 900);
+    pros::delay(5);
+    chassis.moveToPose(40.4, 23.4, 90, 1000, {.minSpeed=90});
+    pros::delay(500);
+    cascade_go_to(0);
+    pros::delay(300);
+    pneA.set_value(true);
 
 
     // stray yellow 2
