@@ -74,12 +74,12 @@ void competition_initialize() {
 // more: build a separate program per auton and switch between them on the
 // controller.
 void autonomous() {
-    //small_motor_stop(); // do not remove
     //auton3();
     //auton2();
     //left4_1();
     //skills_auton();
-    auton4();
+    //auton4();
+    angular_PID_tune();
 }
 
 // ===== OPCONTROL FUNCTION =====
