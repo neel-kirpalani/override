@@ -2,7 +2,6 @@
 #include "lemlib/api.hpp"
 #include "globals.h"
 #include "subsystems/drivetrain.h"
-#include "subsystems/intake.h"
 #include "routines/autons.h"
 #include "routines/skills.h"
 #include "subsystems/macros.h"
@@ -105,12 +104,8 @@ void opcontrol() {
 
         
 
-        // L2: spin both 5.5W motors at full speed while held
-        if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-            small_motor.move_voltage(12000);
-        } else {
-            small_motor.move_voltage(0);
-        }
+        
+        
 
         // Up: intake forward (was on L2)
         if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
@@ -125,12 +120,7 @@ void opcontrol() {
         }
         
 
-        // Cascade controls. The lift control loop runs on its own task, so
-        // there is nothing to tick here - only the driver's inputs.
-        if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
-            cascade_home();
-        }
-
+        // cascade controls
         if (cascade_homing()) {
             // Return-to-bottom is in charge until it finishes
         } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {

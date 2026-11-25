@@ -2,7 +2,6 @@
 #include "main.h"
 #include "globals.h"
 #include "subsystems/drivetrain.h"
-#include "subsystems/intake.h"
 
 // Tuning routines
 void angular_PID_tune();
