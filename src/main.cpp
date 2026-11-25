@@ -58,28 +58,8 @@ void initialize() {
 
 }
 
-// ===== DISABLED FUNCTION =====
-void disabled() {
-    small_motor_stop();
-}
-
-
-// ===== COMPETITION INITIALIZE =====
-void competition_initialize() {
-
-}
-
-// ===== AUTONOMOUS FUNCTION =====
-// Pick the routine by changing the call below. There is no auton selector any
-// more: build a separate program per auton and switch between them on the
-// controller.
 void autonomous() {
-    //auton3();
-    //auton2();
-    //left4_1();
-    //skills_auton();
-    //auton4();
-    angular_PID_tune();
+    
 }
 
 // ===== OPCONTROL FUNCTION =====
@@ -120,11 +100,8 @@ void opcontrol() {
             cue2_fired = true;
             controller.rumble("- -");
         }
-
-        if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
-            auton4();
-        }
-
+    
+        
 
         
 

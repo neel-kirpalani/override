@@ -9,7 +9,7 @@ void angular_PID_tune();
 void lateral_PID_tune();
 
 // Match autons
-void left4_1();
-void auton2();
+void three_pin();
+void two_wall_pins();
 void auton3();
 void auton4();
