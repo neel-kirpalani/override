@@ -13,10 +13,6 @@ pros::Controller controller(pros::E_CONTROLLER_MASTER);
 pros::MotorGroup left_motor_group({10,-8}, pros::MotorGearset::blue);
 pros::MotorGroup right_motor_group({1, -2}, pros::MotorGearset::blue);
 
-// Intakes 
-pros::MotorGroup intake_motor({9, -3}, pros::MotorGearset::blue);
-pros::MotorGroup intake_motor2({-7}, pros::MotorGearset::blue);
-
 // Cascade
 pros::MotorGroup cascade_motor({14, -15}, pros::MotorGearset::green, pros::MotorUnits::degrees);
 

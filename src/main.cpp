@@ -4,7 +4,6 @@
 #include "subsystems/drivetrain.h"
 #include "routines/autons.h"
 #include "routines/skills.h"
-#include "subsystems/macros.h"
 #include "subsystems/cascade.h"
 #include "subsystems/small_motor.h"
 #include "subsystems/screen.h"
@@ -31,8 +30,6 @@ void initialize() {
 
     left_motor_group.tare_position_all();
     right_motor_group.tare_position_all();
-    intake_motor.tare_position();
-    intake_motor2.tare_position();
     cascade_motor.tare_position();
 
     cascade_init();
@@ -107,17 +104,6 @@ void opcontrol() {
         
         
 
-        // Up: intake forward (was on L2)
-        if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
-            intake1_forward = !intake1_forward;
-
-            if (intake1_forward) {
-                intake1_reverse = false;
-                intake_forward_full();
-            } else {
-                intake_stop();
-            }
-        }
         
 
         // cascade controls

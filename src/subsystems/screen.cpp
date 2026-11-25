@@ -199,8 +199,6 @@ struct MotorGroupEntry {
 static MotorGroupEntry groups[] = {
     { "DRIVE L", &left_motor_group },
     { "DRIVE R", &right_motor_group },
-    { "INTAKE",  &intake_motor },
-    { "ROLLER",  &intake_motor2 },
     { "CASCADE", &cascade_motor },
 };
 static const int GROUP_COUNT = sizeof(groups) / sizeof(groups[0]);

@@ -10,5 +10,5 @@ void lateral_PID_tune();
 // Match autons
 void three_pin();
 void two_wall_pins();
-void auton3();
-void auton4();
+void secondary_one_pin();
+void primary_one_pin();

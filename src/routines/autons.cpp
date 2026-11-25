@@ -1,7 +1,6 @@
 #include "main.h"
 #include "globals.h"
 #include "subsystems/drivetrain.h"
-#include "subsystems/intake.h"
 #include "routines/autons.h"
 #include "subsystems/cascade.h"
 #include "subsystems/small_motor.h"
@@ -32,10 +31,10 @@ void two_wall_pins(){
 
 }
 
-void auton3(){
+void secondary_one_pin(){
     
 }
 
-void auton4(){     
+void primary_one_pin(){     
     
 }

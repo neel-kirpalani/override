@@ -10,10 +10,6 @@ extern pros::Controller controller;
 extern pros::MotorGroup left_motor_group;
 extern pros::MotorGroup right_motor_group;
 
-// Intake motor groups
-extern pros::MotorGroup intake_motor;
-extern pros::MotorGroup intake_motor2;
-
 // Cascade motor group
 extern pros::MotorGroup cascade_motor;
 
