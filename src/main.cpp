@@ -114,11 +114,6 @@ void opcontrol() {
             pneA.set_value(pne1);
         }
 
-        // B: pneumatics solenoid on port H
-        if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
-            pne4 = !pne4;
-            pneD.set_value(pne4);
-        }
 
         // drive controls
         int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
