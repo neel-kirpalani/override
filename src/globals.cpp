@@ -16,7 +16,8 @@ pros::MotorGroup right_motor_group({19, -20}, pros::MotorGearset::blue);
 pros::MotorGroup cascade_motor({14, -15}, pros::MotorGearset::green, pros::MotorUnits::degrees);
 
 // Pneumatics 
-pros::adi::DigitalOut pneA('A');
+pros::adi::DigitalOut claw_angler('A');
+pros::adi::DigitalOut toggle_holder('B');
 
 // IMU 
 pros::Imu imu(17);

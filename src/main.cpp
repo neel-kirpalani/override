@@ -10,7 +10,8 @@
 #include "mvlib/Optional/lemlib.hpp"
 
 
-bool pne1 = false;
+bool claw_angler_state = false;
+bool toggle_holder_state = false;
 
 void disabled() {
 
@@ -109,9 +110,15 @@ void opcontrol() {
         }
 
         // Pneumatics
+
+        //Claw angler
         if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
-            pne1 = !pne1;
-            pneA.set_value(pne1);
+            claw_angler_state = !claw_angler_state;
+            claw_angler.set_value(claw_angler_state);
+        }
+        if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+            toggle_holder_state = !toggle_holder_state;
+            toggle_holder.set_value(toggle_holder_state);
         }
 
 

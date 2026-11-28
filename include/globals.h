@@ -19,7 +19,8 @@ extern pros::Optical colorSensor;
 extern pros::Optical sortSensor;
 
 // Pneumatics
-extern pros::adi::DigitalOut pneA;
+extern pros::adi::DigitalOut claw_angler;
+extern pros::adi::DigitalOut toggle_holder;
 
 // IMU
 extern pros::Imu imu;
@@ -28,3 +29,4 @@ extern pros::Imu imu;
 extern pros::Distance distFront;
 extern pros::Distance distLeft;
 extern pros::Distance distRight;
+
