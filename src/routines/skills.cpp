@@ -3,14 +3,14 @@
 #include "subsystems/drivetrain.h"
 #include "routines/skills.h"
 #include "subsystems/cascade.h"
-#include "subsystems/small_motor.h"
+
 
 
 void skills_auton() {
     // auton3 code first
-    small_motor.move_voltage(12000);
+    //small_motor.move_voltage(12000);
     pros::delay(500);
-    small_motor.move_voltage(0);
+    //small_motor.move_voltage(0);
     chassis.setPose(63.65, 0, 270);
     cascade_go_to(250);
     pros::delay(10);

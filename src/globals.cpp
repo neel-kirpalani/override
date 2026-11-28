@@ -8,26 +8,18 @@
 // Controller
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
-
 // Drivebase 
-pros::MotorGroup left_motor_group({10,-8}, pros::MotorGearset::blue);
-pros::MotorGroup right_motor_group({1, -2}, pros::MotorGearset::blue);
+pros::MotorGroup left_motor_group({14,-13}, pros::MotorGearset::blue);
+pros::MotorGroup right_motor_group({19, -20}, pros::MotorGearset::blue);
 
 // Cascade
 pros::MotorGroup cascade_motor({14, -15}, pros::MotorGearset::green, pros::MotorUnits::degrees);
 
-// 5.5W motors - CHANGE THESE PORTS to wherever they are plugged in.
-// 5.5W motors are green cartridges (200 rpm).
-pros::MotorGroup small_motor({-4, 7}, pros::MotorGearset::green);
-
-
 // Pneumatics 
 pros::adi::DigitalOut pneA('A');
-pros::adi::DigitalOut pneB('B');
-pros::adi::DigitalOut pneD('H');
 
 // IMU 
-pros::Imu imu(21);
+pros::Imu imu(17);
 
 // Distance Sensors
 

@@ -26,7 +26,7 @@ lemlib::OdomSensors odomSensors(
 
 // Lateral PID controller
 lemlib::ControllerSettings lateral_controller(
-    10,   // kP
+    8,   // kP
     0,   // kI
     3,   // kD
     0,   // anti windup
@@ -34,14 +34,14 @@ lemlib::ControllerSettings lateral_controller(
     0,   // small error timeout (ms)
     0,   // large error range (in)
     0,   // large error timeout (ms)
-    0    // max acceleration
+    100    // max acceleration
 );
 
 // Angular PID controller
 lemlib::ControllerSettings angular_controller(
-    2,   // kP
+    3,   // kP
     0,   // kI
-    10,  // kD
+    20,  // kD
     0,   // anti windup
     0,   // small error range (deg)
     0,   // small error timeout (ms)

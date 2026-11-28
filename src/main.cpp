@@ -5,29 +5,24 @@
 #include "routines/autons.h"
 #include "routines/skills.h"
 #include "subsystems/cascade.h"
-#include "subsystems/small_motor.h"
 #include "subsystems/screen.h"
 #include "mvlib/api.hpp"
 #include "mvlib/Optional/lemlib.hpp"
 
 
-// ===== GLOBAL VARIABLES =====
-bool intake1 = false;
-bool intake2 = false;
 bool pne1 = false;
-bool pne2 = false;
-bool pne4 = false;
-bool intake1_forward = false;
-bool intake1_reverse = false;
-bool intake2_forward = false;
-bool intake2_reverse = false;
-bool auto_intake_active = false;
 
+void disabled() {
+
+}
+
+void competition_initialize(){
+
+}
 
 void initialize() {
     chassis.calibrate();
-
-
+    
     left_motor_group.tare_position_all();
     right_motor_group.tare_position_all();
     cascade_motor.tare_position();
@@ -36,8 +31,6 @@ void initialize() {
 
     left_motor_group.set_brake_mode_all(pros::E_MOTOR_BRAKE_BRAKE);
     right_motor_group.set_brake_mode_all(pros::E_MOTOR_BRAKE_BRAKE);
-    small_motor.set_brake_mode_all(pros::E_MOTOR_BRAKE_BRAKE);
-    small_motor_init();
     // Build the brain UI and start refreshing it. Runs in the background so
     // it stays live during disabled, autonomous and driver control.
     screen_init();
@@ -58,9 +51,7 @@ void autonomous() {
     
 }
 
-// ===== OPCONTROL FUNCTION =====
 void opcontrol() {
-    small_motor_stop();
     // Rumble cues. Match length and the two warning points, in seconds
     // remaining; change a cue time here and nothing else needs touching.
     constexpr int DRIVER_DURATION_S = 105;

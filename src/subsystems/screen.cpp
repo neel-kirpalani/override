@@ -94,7 +94,7 @@ static void compute_layout() {
     // Motors grid: 2 rows of blocks plus a summary strip must fit the page.
     MB_STRIP_H = vscale(26);
     // 5 groups in 2 rows of 3, so 2 rows. (GROUP_COUNT is defined below.)
-    const int MOTOR_ROWS = 2;
+    const int MOTOR_ROWS = 1;
     int grid_h = page_h - MB_STRIP_H - PAD;        // leave room for the strip
     MB_H = grid_h / MOTOR_ROWS - MB_GAP_Y;
     if (MB_H < 40) MB_H = 40;
